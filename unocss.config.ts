@@ -10,15 +10,21 @@ import {
 
 export default defineConfig({
   presets: [
-    presetAttributify(),
-    presetIcons(),
     presetUno(),
-    presetWebFonts(),
+    presetAttributify(),
+    presetIcons({
+      scale: 1.2,
+      warn: true,
+    }),
+    presetWebFonts({
+      fonts: {
+        sans: 'DM Sans',
+        serif: 'DM Serif Display',
+        mono: 'DM Mono',
+      },
+    }),
+  ],
+  transformers: [
     transformerDirectives(),
   ],
-  shortcuts: {
-    'flex-center': 'flex justify-center items-center',
-    'router-link': 'flex-center decoration-none',
-    'button': 'border-none text-4 px-4 py-2',
-  },
 })

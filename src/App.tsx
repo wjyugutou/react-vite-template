@@ -1,21 +1,51 @@
-import { BrowserRouter } from 'react-router-dom'
-import './App.css'
-import { RecoilRoot } from 'recoil'
-import routes from './routes'
-
-function AppRoutes() {
-  return useRoutes(routes)
+import type { FC } from 'react'
+import { useEffect } from 'react'
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom'
+import Layout from './layout'
+import lazyComponent from '@/components/lazyComponent'
+interface Props {
 }
 
-function App() {
-  return (
-    <RecoilRoot>
-      <main className=" px-4 py-10 text-center text-gray-700 dark:text-gray-200">
-        <BrowserRouter>
-          <AppRoutes/>
-        </BrowserRouter>
-      </main>
-    </RecoilRoot>)
+const App: FC<Props> = () => {
+  const navgate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navgate({
+        pathname: '/home',
+      })
+    }
+    console.log('App mount', location)
+
+    return () => { }
+  }, [location])
+
+  const Routes = useRoutes([
+    {
+      path: '/',
+      element: <Layout/>,
+      children: [
+        {
+          path: '/home/:id',
+          element: lazyComponent('@/pages/home'),
+        }, {
+          path: '/home',
+          element: lazyComponent('@/pages/home'),
+        }, {
+          path: '/admin',
+          element: lazyComponent('@/pages/admin'),
+        },
+      ],
+
+    }, {
+      path: '/login',
+      element: lazyComponent('@/pages/login'),
+
+    },
+  ])
+
+  return Routes
 }
 
 export default App
