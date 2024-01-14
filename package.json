@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@unocss/reset": "^0.58.3",
     "localforage": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -17,6 +18,7 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@antfu/eslint-config-react": "^0.43.1",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
