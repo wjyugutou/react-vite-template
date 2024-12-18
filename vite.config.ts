@@ -1,21 +1,27 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import Pages from 'vite-plugin-pages'
-import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(), Unocss(),
-    Pages(), AutoImport({
-      imports: ['react', 'react-router-dom'],
-      dirs: ['./src/hooks'],
-    })],
+    react(),
+    Unocss(),
+    AutoImport({
+      imports: ['react', 'react-router-dom', {
+        from: 'react-router-dom',
+        imports: ['useRouteError'],
+      }],
+      dirs: ['./src/hooks', './src/store'],
+      dts: 'types/auto-imports.d.ts',
+    }),
+  ],
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
     },
   },
+  envDir: './env',
 })

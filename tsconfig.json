@@ -21,6 +21,10 @@
     "strict": true,
     "target": "ES2020",
     "useDefineForClassFields": true,
+    "types": [
+      "./types/auto-imports.d.ts",
+      "./types/vite-env.d.ts"
+    ]
   },
   "exclude": ["dist", "node_modules"],
   "references": [
