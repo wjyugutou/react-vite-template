@@ -6,9 +6,9 @@ export interface AuthRoute {
   authCode?: string[]
 }
 
-interface UserState {
-  user: any
-  permissions: any
+export interface UserState {
+  user: Record<string, unknown>
+  permissions: unknown[]
   routes: AuthRoute[]
   setUser: (user: any) => void
   setPermissions: (permissions: any) => void
