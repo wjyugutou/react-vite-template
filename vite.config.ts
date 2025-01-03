@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     Unocss(),
     AutoImport({
-      imports: ['react', 'react-router-dom', {
+      imports: ['react', 'react-router-dom', 'ahooks', {
         from: 'react-router-dom',
         imports: ['useRouteError'],
       }],
