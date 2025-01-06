@@ -14,7 +14,7 @@ export default defineConfig({
         from: 'react-router-dom',
         imports: ['useRouteError'],
       }],
-      dirs: ['./src/hooks', './src/store'],
+      dirs: ['./src/hooks', './src/store', './src/utils', './src/components'],
       dts: 'types/auto-imports.d.ts',
     }),
   ],
