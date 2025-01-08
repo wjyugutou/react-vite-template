@@ -1,24 +1,20 @@
 import type { FC } from 'react'
-import LazyLoad from '@/components/LazyLoad'
 
 interface Props {
-  path: string
-  lazyFn: () => Promise<{ default: React.ComponentType<any> }>
+  children: React.ReactNode
 }
 
-const Permission: FC<Props> = ({ path, lazyFn }) => {
-  // const random = Math.random()
-  // console.log('random', random)
+const Permission: FC<Props> = ({ children }) => {
+  const userStore = useUserStore()
+  const location = useLocation()
+  console.log(userStore.user)
+  console.log(location)
 
-  // if (random > 0.8) {
-  //   console.log('redirect', random)
+  if (!userStore.user && location.pathname !== '/login') {
+    return <Navigate to='/login' replace />
+  }
 
-  //   return <Navigate to='/login' />
-  //   // redirect('/login', 401)
-  //   // return null
-  // }
-
-  return <LazyLoad path={path} lazyFn={lazyFn} />
+  return children
 }
 
 export default Permission

@@ -7,7 +7,7 @@ export interface AuthRoute {
 }
 
 export interface UserState {
-  user: Record<string, unknown>
+  user: Record<string, unknown> | null
   permissions: unknown[]
   routes: AuthRoute[]
   setUser: (user: any) => void

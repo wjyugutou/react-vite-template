@@ -18,6 +18,23 @@ export default defineConfig({
       dts: 'types/auto-imports.d.ts',
     }),
   ],
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      output: {
+        // manualChunks(id) {
+        //   if (id.includes('node_modules')) {
+        //     return id.toString().split('node_modules/.pnpm')[1].split('/')[0].toString()
+        //   }
+        //   else if (id.includes('src')) {
+        //     const a = id.split('/').at(-1)?.includes('index') ? id.split('/').at(-2) : id.split('/').at(-1)?.split('.')[0]
+
+        //     return a
+        //   }
+        // },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@/': `${path.resolve(__dirname, 'src')}/`,
