@@ -18,7 +18,14 @@ interface ImportMetaEnv {
 ```
 
 # 请求
+
 请求使用alova + fetchAdapter
 
 # 样式
+
 使用unocss
+
+# 路由
+
+使用[@tanstack/react-router](https://tanstack.com/router/latest/docs/framework/react/overview)
+约定式路由

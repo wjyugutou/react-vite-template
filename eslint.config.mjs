@@ -6,7 +6,6 @@ export default antfu({
   toml: false,
   yaml: false,
   test: false,
-  jsx: false,
   unocss: true,
 }, [
   {
