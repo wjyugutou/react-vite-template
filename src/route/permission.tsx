@@ -10,16 +10,16 @@ const Permission: FC<Props> = ({ children }) => {
   const location = useLocation()
   const routeLoaderData = useLoaderData({ from: '__root__' })
 
-  const params = useMemo(() => {
-    return { redirect: location.pathname }
-  }, [])
 
+ 
   if (!routeLoaderData) {
-    return <Navigate to="/login" params={params} replace />
+    return redirect({
+      to: '/login',
+    })
   }
 
   if (!userStore.user && location.pathname !== '/login') {
-    return <Navigate to="/login" params={params} replace />
+    return <Navigate to="/login" replace />
   }
 
   return children

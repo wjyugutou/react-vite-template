@@ -23,7 +23,6 @@ const router = createRouter({
   routeTree,
   defaultErrorComponent: ErrorBoundary,
   defaultNotFoundComponent: NotFound,
-
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
