@@ -1,13 +1,21 @@
-import { createLazyFileRoute, redirect, useNavigate, useParams } from '@tanstack/react-router'
+import {
+  createLazyFileRoute,
+  type FileRouteTypes,
+  useNavigate,
+} from '@tanstack/react-router'
 
-export const Route = createLazyFileRoute('/login/')({
+interface Search {
+  redirect: FileRouteTypes['to']
+}
+
+export const Route = createLazyFileRoute('/login')({
   component: Login,
 })
 
 function Login() {
+  const searchData = Route.useSearch() as Search
   const navigate = useNavigate()
   const userStore = useUserStore()
-  const params = useParams({ from: '/login/' })
   const [loading, startTransition] = useTransition()
 
   async function handleLogin() {
@@ -17,11 +25,9 @@ function Login() {
       await userStore.login({
         name: 'admin',
       })
-      redirect({
-        to,
-      })
+
       navigate({
-        to: '/home',
+        to: searchData.redirect || '/home',
         replace: true,
       })
     })

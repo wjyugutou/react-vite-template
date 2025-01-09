@@ -16,16 +16,16 @@ import { Route as rootRoute } from './pages/__root'
 
 // Create Virtual Routes
 
-const LoginIndexLazyImport = createFileRoute('/login/')()
+const LoginLazyImport = createFileRoute('/login')()
 const HomeIndexLazyImport = createFileRoute('/home/')()
 
 // Create/Update Routes
 
-const LoginIndexLazyRoute = LoginIndexLazyImport.update({
-  id: '/login/',
-  path: '/login/',
+const LoginLazyRoute = LoginLazyImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./pages/login/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./pages/login.lazy').then((d) => d.Route))
 
 const HomeIndexLazyRoute = HomeIndexLazyImport.update({
   id: '/home/',
@@ -37,18 +37,18 @@ const HomeIndexLazyRoute = HomeIndexLazyImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/home/': {
       id: '/home/'
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -57,38 +57,38 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/login': typeof LoginLazyRoute
   '/home': typeof HomeIndexLazyRoute
-  '/login': typeof LoginIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
+  '/login': typeof LoginLazyRoute
   '/home': typeof HomeIndexLazyRoute
-  '/login': typeof LoginIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/login': typeof LoginLazyRoute
   '/home/': typeof HomeIndexLazyRoute
-  '/login/': typeof LoginIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/home' | '/login'
+  fullPaths: '/login' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/home' | '/login'
-  id: '__root__' | '/home/' | '/login/'
+  to: '/login' | '/home'
+  id: '__root__' | '/login' | '/home/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  LoginLazyRoute: typeof LoginLazyRoute
   HomeIndexLazyRoute: typeof HomeIndexLazyRoute
-  LoginIndexLazyRoute: typeof LoginIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  LoginLazyRoute: LoginLazyRoute,
   HomeIndexLazyRoute: HomeIndexLazyRoute,
-  LoginIndexLazyRoute: LoginIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -101,15 +101,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/home/",
-        "/login/"
+        "/login",
+        "/home/"
       ]
+    },
+    "/login": {
+      "filePath": "login.lazy.tsx"
     },
     "/home/": {
       "filePath": "home/index.lazy.tsx"
-    },
-    "/login/": {
-      "filePath": "login/index.lazy.tsx"
     }
   }
 }

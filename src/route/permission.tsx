@@ -1,25 +1,20 @@
 import type { FC } from 'react'
-import { Navigate, redirect, useLoaderData, useLocation } from '@tanstack/react-router'
+import { Navigate, useLoaderData, useLocation } from '@tanstack/react-router'
 
 interface Props {
   children: React.ReactNode
 }
 
 const Permission: FC<Props> = ({ children }) => {
-  const userStore = useUserStore()
   const location = useLocation()
   const routeLoaderData = useLoaderData({ from: '__root__' })
 
-
- 
-  if (!routeLoaderData) {
-    return redirect({
-      to: '/login',
-    })
+  const search = {
+    redirect: location.pathname,
   }
 
-  if (!userStore.user && location.pathname !== '/login') {
-    return <Navigate to="/login" replace />
+  if (!routeLoaderData && location.pathname !== '/login') {
+    return <Navigate to="/login" replace search={search} />
   }
 
   return children
