@@ -1,9 +1,22 @@
-function ErrorBoundary() {
-  const error = useRouteError()
+import { ErrorComponent, type ErrorComponentProps } from '@tanstack/react-router'
 
-  console.log(error)
+interface Props extends ErrorComponentProps {
 
-  return <div>ErrorBoundary</div>
+}
+
+function ErrorBoundary(props: Props) {
+  console.log(props)
+
+  return (
+    <div>
+      <div>
+        {props.error.message}
+      </div>
+      <div>
+        {props.error.stack}
+      </div>
+    </div>
+  )
 }
 
 export default ErrorBoundary

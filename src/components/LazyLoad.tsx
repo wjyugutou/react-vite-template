@@ -12,7 +12,7 @@ const LazyLoad: FC<Props> = ({ path }) => {
     return lazy(() => {
       return import(`@/pages/${path}.tsx`)
         .catch(() => import(`@/pages/${path}/index.tsx`))
-        .catch(() => import(`@/pages/404.tsx`))
+        .catch(() => import(`@/pages/-404`))
     })
   }, [path])
 
