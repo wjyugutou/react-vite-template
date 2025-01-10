@@ -10,7 +10,7 @@ const Permission: FC<Props> = ({ children }) => {
   const routeLoaderData = useLoaderData({ from: '__root__' })
 
   const search = {
-    redirect: location.pathname,
+    redirect: encodeURIComponent(location.pathname),
   }
 
   if (!routeLoaderData && location.pathname !== '/login') {
