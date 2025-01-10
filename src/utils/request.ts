@@ -14,10 +14,15 @@ declare module 'alova' {
 }
 
 const alovaInstance = createAlova({
+  id: 'default-request',
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000,
   requestAdapter: adapterFetch(),
   statesHook: reactHook,
+  cacheFor: {
+    Get: 60 * 1000, // 1min
+    Post: 60 * 1000, // 1min
+  },
   // beforeRequest: (config) => {
   //   console.log('beforeRequest', config)
   //   // const token = localStorage.getItem('token')
